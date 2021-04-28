@@ -1,0 +1,68 @@
+<html xmlns:th="http://thymeleaf.org">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+<style>
+    div.mytable {
+        margin: auto;
+        width: 1020px;
+        padding: 10px;
+    }
+</style>
+
+<body>
+
+<ul class="nav navbar-nav " style="float: right;">
+    <li><a th:href="@{/details/add}">REGISTER</a></li>
+    <li><a th:href="@{/displayDetails}">VIEW DETAILS</a></li>
+</ul>
+
+<h1 style="text-align: center;text-decoration: dotted">DETAILS OF THE USERS</h1>
+
+<div class="mytable">
+    <br>
+    <br>
+    <div class="container-fluid">
+        <form th:action="@{/search}" th:method="get">
+            <input type="text" name="name" id="name" required >
+            <button type="submit">Submit</button>
+        </form>
+        </div>
+<table class="table table-striped table-primary">
+
+    <thead class="ttop">
+    <tr class="table-info">
+
+        <td><b>NAME</b> </td>
+        <td><b>AGE</b> </td>
+        <td><b>CONTACT NUMBER</b> </td>
+        <td><b>EMAIL</b> </td>
+        <td><b>ADDRESS</b> </td>
+
+        <td></td>
+        <td></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="d, iStat : ${details}" th:style="${iStat.odd}? 'font-weight: normal;'">
+
+
+        </td><td th:text="${d.name}"></td>
+        <td th:text="${d.age}"></td>
+        <td th:text="${d.mobile}"></td>
+        <td th:text="${d.email}"></td>
+        <td th:text="${d.address}"></td>
+
+
+        <td> <a th:href="@{/editDetail(detailId=${d.id})}"><button type="submit">UPDATE</button> </a></td>
+        <td> <form th:action="@{/deleteDetail(detailId=${d.id})}" th:method="delete"><input type="submit" value="DELETE"/></form> </td>
+
+    </tr>
+    </tbody>
+</table>
+</div>
+</body>
+
+</html>
